@@ -1,13 +1,9 @@
 /* ============================================
-   RENTAL MANAGER — STYLES
+   RENTAL MANAGER — STYLESHEET
+   Professional property management interface
    ============================================ */
 
-/* === RESET === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Nunito', sans-serif;
@@ -17,9 +13,8 @@ body {
 }
 
 
-/* ============================================
-   TOP BAR
-   ============================================ */
+/* --- TOP BAR --- */
+
 .topbar {
   background: #fff;
   border-bottom: 3px solid #c8956c;
@@ -28,31 +23,49 @@ body {
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.topbar h1 {
-  font-size: 22px;
+.topbar-left h1 {
+  font-size: 20px;
   font-weight: 800;
   color: #5a3921;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.topbar h1 span {
-  font-size: 26px;
 }
 
 .topbar-sub {
-  font-size: 13px;
+  font-size: 12px;
   color: #8c7560;
   margin-top: 2px;
 }
 
+.refresh-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #d4c4b0;
+  background: #fff;
+  color: #5a3921;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
 
-/* ============================================
-   NAVIGATION TABS
-   ============================================ */
+.refresh-btn:hover {
+  background: #faf5f0;
+  border-color: #c8956c;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* --- NAVIGATION --- */
+
 .nav {
   display: flex;
   gap: 8px;
@@ -63,12 +76,12 @@ body {
 }
 
 .nav button {
-  padding: 12px 22px;
-  border-radius: 12px;
+  padding: 12px 24px;
+  border-radius: 10px;
   border: 2px solid #d4c4b0;
   background: #fff;
   color: #6b5744;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
@@ -76,9 +89,7 @@ body {
   transition: all 0.2s;
 }
 
-.nav button:hover {
-  background: #faf5f0;
-}
+.nav button:hover { background: #faf5f0; }
 
 .nav button.active {
   background: #5a3921;
@@ -87,9 +98,8 @@ body {
 }
 
 
-/* ============================================
-   YEAR SELECTOR BAR
-   ============================================ */
+/* --- YEAR SELECTOR --- */
+
 .year-bar {
   display: flex;
   gap: 6px;
@@ -105,16 +115,14 @@ body {
   border: 2px solid #d4c4b0;
   background: #fff;
   color: #6b5744;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.year-btn:hover {
-  border-color: #c8956c;
-}
+.year-btn:hover { border-color: #c8956c; }
 
 .year-btn.active {
   background: #c8956c;
@@ -123,9 +131,8 @@ body {
 }
 
 
-/* ============================================
-   MAIN CONTENT AREA
-   ============================================ */
+/* --- CONTENT --- */
+
 .content {
   padding: 20px;
   max-width: 900px;
@@ -133,9 +140,8 @@ body {
 }
 
 
-/* ============================================
-   STAT CARDS (Dashboard)
-   ============================================ */
+/* --- STAT CARDS --- */
+
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -145,63 +151,50 @@ body {
 
 .stat-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 20px;
   border-left: 5px solid #c8956c;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.stat-card.green {
-  border-left-color: #4a9c6d;
-}
-
-.stat-card.red {
-  border-left-color: #c75c3a;
-}
-
-.stat-card.blue {
-  border-left-color: #4a7fb5;
-}
+.stat-card.green  { border-left-color: #4a9c6d; }
+.stat-card.red    { border-left-color: #c75c3a; }
+.stat-card.blue   { border-left-color: #4a7fb5; }
+.stat-card.amber  { border-left-color: #c89a2c; }
 
 .stat-label {
-  font-size: 13px;
+  font-size: 12px;
   color: #8c7560;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .stat-value {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: #2d2418;
 }
 
-.stat-card.green .stat-value {
-  color: #4a9c6d;
-}
-
-.stat-card.red .stat-value {
-  color: #c75c3a;
-}
-
-.stat-card.blue .stat-value {
-  color: #4a7fb5;
-}
+.stat-card.green .stat-value { color: #4a9c6d; }
+.stat-card.red .stat-value   { color: #c75c3a; }
+.stat-card.blue .stat-value  { color: #4a7fb5; }
+.stat-card.amber .stat-value { color: #c89a2c; }
 
 
-/* ============================================
-   SEARCH BOX
-   ============================================ */
+/* --- SEARCH --- */
+
 .search-box {
   width: 100%;
   padding: 14px 18px;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 2px solid #d4c4b0;
   background: #fff;
-  font-size: 17px;
+  font-size: 16px;
   font-family: inherit;
   color: #2d2418;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   outline: none;
 }
 
@@ -210,14 +203,11 @@ body {
   box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.2);
 }
 
-.search-box::placeholder {
-  color: #b8a898;
-}
+.search-box::placeholder { color: #b8a898; }
 
 
-/* ============================================
-   FILTER BUTTONS
-   ============================================ */
+/* --- FILTER BUTTONS --- */
+
 .filter-row {
   display: flex;
   gap: 6px;
@@ -227,11 +217,11 @@ body {
 
 .filter-btn {
   padding: 8px 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 2px solid #d4c4b0;
   background: #fff;
   color: #6b5744;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
@@ -244,14 +234,13 @@ body {
 }
 
 
-/* ============================================
-   TENANT LIST CARDS
-   ============================================ */
+/* --- TENANT LIST --- */
+
 .tenant-card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 16px 20px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   cursor: pointer;
   border: 2px solid transparent;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
@@ -263,12 +252,7 @@ body {
 
 .tenant-card:hover {
   border-color: #c8956c;
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.tenant-card:active {
-  transform: scale(0.99);
 }
 
 .tc-left {
@@ -278,66 +262,40 @@ body {
 }
 
 .tc-unit {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   background: #faf5f0;
   border: 2px solid #e8ddd2;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 14px;
   color: #5a3921;
   flex-shrink: 0;
 }
 
-.tc-name {
-  font-size: 17px;
-  font-weight: 700;
-  color: #2d2418;
-}
+.tc-name { font-size: 16px; font-weight: 700; color: #2d2418; }
+.tc-sub  { font-size: 12px; color: #8c7560; margin-top: 2px; }
+.tc-right { text-align: right; }
 
-.tc-sub {
-  font-size: 13px;
-  color: #8c7560;
-  margin-top: 2px;
-}
+.tc-amount { font-size: 17px; font-weight: 800; }
+.tc-amount.good    { color: #4a9c6d; }
+.tc-amount.partial { color: #c89a2c; }
+.tc-amount.unpaid  { color: #c75c3a; }
 
-.tc-amount {
-  font-size: 18px;
-  font-weight: 800;
-  text-align: right;
-}
-
-.tc-amount.good {
-  color: #4a9c6d;
-}
-
-.tc-amount.partial {
-  color: #c89a2c;
-}
-
-.tc-amount.unpaid {
-  color: #c75c3a;
-}
-
-.tc-months {
-  font-size: 12px;
-  color: #8c7560;
-  text-align: right;
-  margin-top: 2px;
-}
+.tc-months { font-size: 11px; color: #8c7560; margin-top: 2px; }
+.results-count { font-size: 13px; color: #8c7560; margin-bottom: 12px; font-weight: 600; }
 
 
-/* ============================================
-   TENANT PROFILE
-   ============================================ */
+/* --- PROFILE --- */
+
 .back-btn {
   background: none;
   border: none;
   color: #4a7fb5;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
@@ -345,38 +303,20 @@ body {
   padding: 6px 0;
 }
 
-.back-btn:hover {
-  text-decoration: underline;
-}
+.back-btn:hover { text-decoration: underline; }
 
 .profile-header {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 24px;
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   border-top: 4px solid #c8956c;
 }
 
-.ph-unit {
-  font-size: 14px;
-  color: #c8956c;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.ph-name {
-  font-size: 24px;
-  font-weight: 800;
-  color: #2d2418;
-  margin-bottom: 8px;
-}
-
-.ph-detail {
-  font-size: 15px;
-  color: #6b5744;
-  margin-bottom: 4px;
-}
+.ph-unit   { font-size: 13px; color: #c8956c; font-weight: 800; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.ph-name   { font-size: 22px; font-weight: 800; color: #2d2418; margin-bottom: 10px; }
+.ph-detail { font-size: 14px; color: #6b5744; margin-bottom: 4px; }
 
 .ph-total-row {
   display: flex;
@@ -387,95 +327,44 @@ body {
   border-top: 2px solid #f0e8df;
 }
 
-.ph-total-label {
-  font-size: 15px;
-  color: #8c7560;
-  font-weight: 600;
-}
-
-.ph-total-val {
-  font-size: 28px;
-  font-weight: 800;
-  color: #4a9c6d;
-}
-
-.ph-arrears {
-  font-size: 14px;
-  color: #c75c3a;
-  font-weight: 700;
-  margin-top: 4px;
-}
+.ph-total-label { font-size: 14px; color: #8c7560; font-weight: 600; }
+.ph-total-val   { font-size: 26px; font-weight: 800; color: #4a9c6d; }
+.ph-arrears     { font-size: 13px; color: #c75c3a; font-weight: 700; margin-top: 4px; }
 
 
-/* ============================================
-   MONTHLY PAYMENT GRID
-   ============================================ */
+/* --- MONTH GRID --- */
+
 .month-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 8px;
   margin-bottom: 16px;
 }
 
 .month-cell {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 14px;
   text-align: center;
   border: 2px solid #e8ddd2;
 }
 
-.month-cell.paid {
-  background: #f0f8f2;
-  border-color: #b8dcc4;
-}
+.month-cell.paid   { background: #f0f8f2; border-color: #b8dcc4; }
+.month-cell.short  { background: #fdf8ec; border-color: #e8d5a0; }
+.month-cell.missed { background: #fdf0ec; border-color: #e8b8a8; }
 
-.month-cell.short {
-  background: #fdf8ec;
-  border-color: #e8d5a0;
-}
-
-.month-cell.missed {
-  background: #fdf0ec;
-  border-color: #e8b8a8;
-}
-
-.mc-month {
-  font-size: 13px;
-  color: #8c7560;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.mc-amount {
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.mc-amount.paid {
-  color: #4a9c6d;
-}
-
-.mc-amount.short {
-  color: #c89a2c;
-}
-
-.mc-amount.missed {
-  color: #c75c3a;
-}
-
-.mc-note {
-  font-size: 11px;
-  color: #8c7560;
-  margin-top: 4px;
-}
+.mc-month  { font-size: 12px; color: #8c7560; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+.mc-amount { font-size: 18px; font-weight: 800; }
+.mc-amount.paid   { color: #4a9c6d; }
+.mc-amount.short  { color: #c89a2c; }
+.mc-amount.missed { color: #c75c3a; }
+.mc-note { font-size: 10px; color: #8c7560; margin-top: 4px; }
 
 
-/* ============================================
-   SECTION TITLES
-   ============================================ */
+/* --- SECTION TITLES --- */
+
 .section-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   color: #5a3921;
   margin-bottom: 12px;
@@ -484,18 +373,13 @@ body {
 }
 
 
-/* ============================================
-   HISTORY CHIPS (Year Selector in Profile)
-   ============================================ */
-.history-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+/* --- HISTORY CHIPS --- */
+
+.history-row { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .history-chip {
   padding: 10px 16px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 2px solid #d4c4b0;
   background: #fff;
   cursor: pointer;
@@ -504,251 +388,76 @@ body {
   transition: all 0.15s;
 }
 
-.history-chip:hover {
-  border-color: #c8956c;
-}
+.history-chip:hover { border-color: #c8956c; }
+.history-chip.active { background: #5a3921; border-color: #5a3921; }
+.history-chip.active * { color: #fff !important; }
 
-.history-chip.active {
-  background: #5a3921;
-  border-color: #5a3921;
-}
-
-.history-chip.active * {
-  color: #fff !important;
-}
-
-.hc-year {
-  font-size: 16px;
-  font-weight: 800;
-  color: #2d2418;
-}
-
-.hc-name {
-  font-size: 11px;
-  color: #8c7560;
-}
-
-.hc-total {
-  font-size: 12px;
-  font-weight: 700;
-  color: #4a9c6d;
-}
+.hc-year  { font-size: 15px; font-weight: 800; color: #2d2418; }
+.hc-name  { font-size: 11px; color: #8c7560; }
+.hc-total { font-size: 12px; font-weight: 700; color: #4a9c6d; }
 
 
-/* ============================================
-   TAX TABLE
-   ============================================ */
+/* --- TAX TABLE --- */
+
 .tax-info {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
-  font-size: 14px;
+  font-size: 13px;
   color: #6b5744;
+  line-height: 1.7;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .tax-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   margin-bottom: 16px;
 }
 
-.tax-card table {
-  width: 100%;
-  border-collapse: collapse;
-}
+.tax-card table { width: 100%; border-collapse: collapse; }
 
 .tax-card th {
   background: #5a3921;
   color: #fff;
   padding: 12px 16px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.tax-card th:first-child {
-  text-align: left;
-}
+.tax-card th:first-child { text-align: left; }
 
 .tax-card td {
-  padding: 12px 16px;
-  font-size: 15px;
+  padding: 11px 16px;
+  font-size: 14px;
   border-bottom: 1px solid #f0e8df;
   text-align: right;
 }
 
-.tax-card td:first-child {
-  text-align: left;
-  font-weight: 700;
-  color: #5a3921;
-}
+.tax-card td:first-child { text-align: left; font-weight: 700; color: #5a3921; }
+.tax-card tr:last-child td { border-bottom: none; }
+.tax-card .total-row { background: #faf5f0; font-weight: 800; }
+.tax-card .total-row td { font-size: 15px; color: #2d2418; border-top: 2px solid #c8956c; }
 
-.tax-card tr:last-child td {
-  border-bottom: none;
-}
-
-.tax-card .total-row {
-  background: #faf5f0;
-  font-weight: 800;
-}
-
-.tax-card .total-row td {
-  font-size: 16px;
-  color: #2d2418;
-  border-top: 2px solid #c8956c;
-}
-
-.tax-red {
-  color: #c75c3a;
-}
-
-.tax-green {
-  color: #4a9c6d;
-}
+.tax-red   { color: #c75c3a; }
+.tax-green { color: #4a9c6d; }
 
 
-/* ============================================
-   LOADING SCREEN
-   ============================================ */
-.loading {
-  text-align: center;
-  padding: 60px 20px;
-}
+/* --- BAR CHART --- */
 
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #e8ddd2;
-  border-top-color: #c8956c;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 16px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-text {
-  font-size: 18px;
-  color: #8c7560;
-  font-weight: 600;
-}
-
-
-/* ============================================
-   SETUP SCREEN
-   ============================================ */
-.setup {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.setup h2 {
-  font-size: 22px;
-  color: #5a3921;
-  margin-bottom: 16px;
-}
-
-.setup p {
-  font-size: 15px;
-  color: #6b5744;
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-
-.setup input {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 12px;
-  border: 2px solid #d4c4b0;
-  font-size: 16px;
-  font-family: inherit;
-  margin-bottom: 12px;
-  outline: none;
-}
-
-.setup input:focus {
-  border-color: #c8956c;
-}
-
-.setup .big-btn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  border: none;
-  background: #5a3921;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 800;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.setup .big-btn:hover {
-  background: #4a2e18;
-}
-
-.step {
-  background: #faf5f0;
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #6b5744;
-  line-height: 1.6;
-}
-
-.step-num {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #c8956c;
-  color: #fff;
-  text-align: center;
-  line-height: 28px;
-  font-weight: 800;
-  font-size: 14px;
-  margin-right: 8px;
-}
-
-.error-msg {
-  background: #fdf0ec;
-  color: #c75c3a;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-.privacy-note {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #8c7560;
-}
-
-
-/* ============================================
-   BAR CHART (Dashboard)
-   ============================================ */
 .chart-container {
   display: flex;
   align-items: flex-end;
   gap: 6px;
   height: 160px;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -762,72 +471,125 @@ body {
   gap: 4px;
 }
 
-.chart-bar-label {
-  font-size: 10px;
-  color: #8c7560;
-  font-weight: 700;
-}
+.chart-bar-label  { font-size: 10px; color: #8c7560; font-weight: 700; }
+.chart-month-label { font-size: 10px; color: #6b5744; font-weight: 700; }
 
 .chart-bar {
   width: 100%;
   max-width: 45px;
-  border-radius: 8px 8px 3px 3px;
+  border-radius: 6px 6px 2px 2px;
   transition: height 0.3s;
 }
 
-.chart-bar.has-data {
-  background: linear-gradient(180deg, #c8956c, #a0724a);
+.chart-bar.has-data { background: linear-gradient(180deg, #c8956c, #a0724a); }
+.chart-bar.no-data  { background: #f0e8df; }
+
+
+/* --- LOADING --- */
+
+.loading { text-align: center; padding: 60px 20px; }
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #e8ddd2;
+  border-top-color: #c8956c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
 }
 
-.chart-bar.no-data {
-  background: #f0e8df;
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text { font-size: 16px; color: #8c7560; font-weight: 600; }
+
+
+/* --- SETUP SCREEN --- */
+
+.setup {
+  max-width: 580px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.chart-month-label {
-  font-size: 11px;
+.setup h2 { font-size: 20px; color: #5a3921; margin-bottom: 16px; }
+.setup p  { font-size: 14px; color: #6b5744; line-height: 1.7; margin-bottom: 12px; }
+
+.setup input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 2px solid #d4c4b0;
+  font-size: 15px;
+  font-family: inherit;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.setup input:focus { border-color: #c8956c; }
+
+.big-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #5a3921;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.big-btn:hover { background: #4a2e18; }
+
+.step {
+  background: #faf5f0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
   color: #6b5744;
-  font-weight: 700;
+  line-height: 1.6;
 }
 
-.results-count {
-  font-size: 14px;
-  color: #8c7560;
+.step-num {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #c8956c;
+  color: #fff;
+  text-align: center;
+  line-height: 26px;
+  font-weight: 800;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.error-msg {
+  background: #fdf0ec;
+  color: #c75c3a;
+  padding: 12px;
+  border-radius: 8px;
   margin-bottom: 12px;
   font-weight: 600;
+  font-size: 13px;
 }
 
-.no-data-msg {
-  text-align: center;
-  padding: 40px;
-  color: #8c7560;
-  font-size: 17px;
-}
+.privacy-note { margin-top: 20px; font-size: 12px; color: #8c7560; }
+.no-data-msg  { text-align: center; padding: 40px; color: #8c7560; font-size: 16px; line-height: 1.6; }
 
 
-/* ============================================
-   RESPONSIVE (Mobile Friendly)
-   ============================================ */
+/* --- RESPONSIVE --- */
+
 @media (max-width: 500px) {
-  .stat-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .month-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .stat-value {
-    font-size: 22px;
-  }
-
-  .tenant-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .tc-amount,
-  .tc-months {
-    text-align: left;
-  }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .month-grid { grid-template-columns: repeat(3, 1fr); }
+  .stat-value { font-size: 20px; }
+  .tenant-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .tc-right { text-align: left; }
 }
