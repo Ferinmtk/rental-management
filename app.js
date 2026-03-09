@@ -38,8 +38,9 @@ function parseCSV(text) {
    GOOGLE SHEETS FETCHER (NO API KEY)
    ============================================ */
 async function fetchSheetCSV(sheetId, sheetName) {
-  var url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(sheetName);
-  var res = await fetch(url);
+  var cacheBust = '&_t=' + Date.now();
+  var url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(sheetName) + cacheBust;
+  var res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) return null;
   var text = await res.text();
   if (!text || text.indexOf('<!DOCTYPE') >= 0 || text.indexOf('<html') >= 0) return null;
@@ -52,8 +53,8 @@ async function fetchSheetData(sheetId) {
   var foundAny = false;
 
   // Test access
-  var testUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&range=A1';
-  var testRes = await fetch(testUrl);
+  var testUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv&range=A1&_t=' + Date.now();
+  var testRes = await fetch(testUrl, { cache: 'no-store' });
   if (!testRes.ok) throw new Error('Could not access the Google Sheet. Please check: 1) The Sheet ID is correct. 2) Sharing is set to "Anyone with the link".');
   var testText = await testRes.text();
   if (testText.indexOf('<!DOCTYPE') >= 0) throw new Error('Could not access the Google Sheet. Please check: 1) The Sheet ID is correct. 2) Sharing is set to "Anyone with the link".');
@@ -257,7 +258,7 @@ function render() {
     nb += '<button class="'+(act?'active':'')+'" onclick="go(\''+n[0]+'\')">'+n[1]+' '+n[2]+'</button>';
   });
   var pc = ''; if (STATE.view==='dashboard') pc = renderDashboard(); else if (STATE.view==='tenants') pc = renderTenants(); else if (STATE.view==='profile') pc = renderProfile(); else if (STATE.view==='tax') pc = renderTax();
-  app.innerHTML = '<div class="topbar"><h1><span>🏠</span> Rental Manager</h1><div class="topbar-sub">'+Object.keys(DATA).length+' Units · '+(ay[0]||'')+'–'+(ay[ay.length-1]||'')+'</div></div><div class="nav">'+nb+'</div><div class="year-bar">'+yb+'</div><div class="content">'+pc+'</div>';
+  app.innerHTML = '<div class="topbar" style="display:flex;justify-content:space-between;align-items:center"><div><h1><span>🏠</span> Rental Manager</h1><div class="topbar-sub">'+Object.keys(DATA).length+' Units · '+(ay[0]||'')+'–'+(ay[ay.length-1]||'')+'</div></div><button id="refresh-btn" onclick="refreshData()" style="padding:10px 18px;border-radius:12px;border:2px solid #d4c4b0;background:#fff;color:#5a3921;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">🔄 Refresh</button></div><div class="nav">'+nb+'</div><div class="year-bar">'+yb+'</div><div class="content">'+pc+'</div>';
 }
 
 
@@ -287,6 +288,19 @@ async function connectSheet() {
 async function loadData() {
   try { DATA = await fetchSheetData(SHEET_ID); if (Object.keys(DATA).length === 0) throw new Error('No data'); STATE.view = 'dashboard'; }
   catch (e) { SHEET_ID = ''; localStorage.removeItem(STORAGE_KEY); STATE.view = 'setup'; }
+  render();
+}
+
+/** Refresh data from Google Sheets — call when you've updated payments */
+async function refreshData() {
+  var btn = document.getElementById('refresh-btn');
+  if (btn) { btn.textContent = '⏳ Loading...'; btn.disabled = true; }
+  try {
+    DATA = await fetchSheetData(SHEET_ID);
+    STATE.view = STATE.view || 'dashboard';
+  } catch (e) {
+    // Keep existing data if refresh fails
+  }
   render();
 }
 
