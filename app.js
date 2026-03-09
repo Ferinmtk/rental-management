@@ -94,11 +94,12 @@ async function fetchSheetData(sheetId) {
     var header = rows[headerIdx].map(function(v) { return (v || '').toLowerCase().trim(); });
     var monthMap = {};
     var mLookup = { jan:1, feb:2, mar:3, apr:4, may:5, jun:6, june:6, jul:7, july:7, aug:8, august:8, sep:9, sept:9, oct:10, nov:11, dec:12 };
-    var noCol = -1, nameCol = -1, phoneCol = -1, rentCol = -1;
+    var noCol = -1, nameCol = -1, phoneCol = -1, rentCol = -1, bldgCol = -1;
 
     for (var ci = 0; ci < header.length; ci++) {
       var v = header[ci];
       if (v === 'no' || v === 'unit') noCol = ci;
+      else if (v === 'building') bldgCol = ci;
       else if (v.indexOf('name') >= 0 && nameCol < 0) nameCol = ci;
       else if (v.indexOf('cell') >= 0 || v.indexOf('phone') >= 0) phoneCol = ci;
       else if (v.indexOf('rent') >= 0) rentCol = ci;
@@ -116,6 +117,7 @@ async function fetchSheetData(sheetId) {
       if (nl.indexOf('blocked') >= 0 || nl.indexOf('care taker') >= 0 || nl.indexOf('vacant') >= 0) continue;
 
       var phone = phoneCol >= 0 ? (row[phoneCol] || '').trim() : '';
+      var bldg = bldgCol >= 0 ? (row[bldgCol] || '').trim() : '';
       var rent = 0;
       if (rentCol >= 0 && row[rentCol]) {
         rent = parseFloat(row[rentCol].replace(/[^0-9.\-]/g, ''));
@@ -131,8 +133,9 @@ async function fetchSheetData(sheetId) {
         }
       }
 
-      if (!data[unit]) data[unit] = { years: {} };
-      data[unit].years[year] = { name: name, phone: phone, rent: rent, payments: payments };
+      var dataKey = bldg ? (bldg + ' ' + unit) : unit;
+      if (!data[dataKey]) data[dataKey] = { years: {} };
+      data[dataKey].years[year] = { name: name, phone: phone, rent: rent, payments: payments, building: bldg };
       foundAny = true;
     }
   }
@@ -161,6 +164,8 @@ function sortUnits(a, b) {
 }
 
 function getBlock(u) {
+  // Handle building-prefixed keys like "Main A1" or "Sultan A3"
+  if (u.indexOf(' ') >= 0) return u.split(' ')[0];
   var c = u.charAt(0);
   if (c === 'A') return 'A';
   if (c === 'B') return 'B';
@@ -263,10 +268,14 @@ function renderTenants() {
     return true;
   });
 
+  // Collect building names from data
+  var buildings = {};
+  all.forEach(function(u) { var b = getBlock(u); buildings[b] = true; });
+  var blist = ['All'].concat(Object.keys(buildings).sort());
+
   var fb = '';
-  ['All', 'A', 'B', 'C', 'Other'].forEach(function(b) {
-    var l = b === 'All' ? 'All' : (b === 'Other' ? 'Units 1–13' : 'Block ' + b);
-    fb += '<button class="filter-btn ' + (STATE.filter === b ? 'active' : '') + '" onclick="STATE.filter=\'' + b + '\';render()">' + l + '</button>';
+  blist.forEach(function(b) {
+    fb += '<button class="filter-btn ' + (STATE.filter === b ? 'active' : '') + '" onclick="STATE.filter=\'' + b + '\';render()">' + b + '</button>';
   });
 
   var cards = '';
